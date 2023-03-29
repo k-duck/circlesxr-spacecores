@@ -69,10 +69,3 @@ AFRAME.registerComponent('asteroid-activator', {
         });
     }
 });
-
-AFRAME.registerComponent('inspector', {
-    init: function() {
-        const THISCOMP = this;
-        THISCOMP.position
-    }
-});

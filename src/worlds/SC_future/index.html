@@ -120,17 +120,22 @@
         </a-entity>
       </a-entity>
       <!-- Educational Artifact will go here -->
-      <a-entity id="asteroid_artifact" position="0 2.6 -3" material="shader: flat;" circles-interactive-object="type: scale; hover_scale: 1.4">
-        <a-entity geometry="primitive: box; width: 1; height: 1.5; depth: 0.01" 
+      <a-entity id="asteroid_artifact" position="0 2.6 -3" material="shader: flat;" circles-artefact="
+      label_visible: true;
+      enabled: false;
+      label_offset: 0 -0.7 0;
+      label_text: Celestial Objects;
+      title: Celestial Objects 1/2;
+      title_back: Celestial Objects 2/2;
+      description: Asteroids, comets, and rogue planets are examples of just some of these celestial objects that pose an 
+      existential threat to humanity and other life on earth. A solid understanding of space travel gives humanity 
+      more opportunities to not only detect things such as incoming asteroids,;
+      description_back: but more knowledge on how we can 
+      defend ourselves from those threats. Asteroids, for example, could be deflected by robotics or even others 
+      asteroids if properly prepared for such an event.">
+        <a-entity geometry="primitive: box; width: 1; height: 0.725; depth: 0.01" 
         material="shader: flat; color: #ffffff">
-          <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#asteroid_pic; shader: flat;" position="0 0.4 0.008"></a-entity>
-          <a-entity text="value: Asteroids and Other Celestial Objects; color: black; font: roboto; width: 1; baseline: top; wrapCount: 21; align: center;" position="0 0.07 0.005"></a-entity>
-          <a-entity text="value: there is extinction level threats that exist outside of the earth itself. Since Earth is a single celestial 
-          object in space amongst trillions, so there is a risk of other objects colliding with earth which threaten our various infrastructures 
-          along with life on earth. Asteroids, comets, and rogue planets are examples of just some of these celestial objects that pose an 
-          existential threat to humanity and other life on earth. A solid understanding of space travel gives humanity more opportunities 
-          to not only detect things such as incoming asteroids, but more knowledge on how we can defend ourselves from those threats.; color: black; 
-          font: roboto; width: 0.9; baseline: top;" position="0 -0.13 0.005"></a-entity>
+          <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#asteroid_pic; shader: flat;" position="0 0 0.008"></a-entity>
         </a-entity>
       </a-entity>
       <!-- Control panel 2 (Dial) -->
