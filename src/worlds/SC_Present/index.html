@@ -92,7 +92,7 @@ f
 
       <!-- objects -->
       <a-entity id="obj-Rocket"
-                position="1.6 0.483 -6.1" rotation="0 90 0" scale=".0009 .0009 .0009"
+                position="1.113 0.483 -6.1" rotation="0 90 0" scale=".0009 .0009 .0009"
                 gltf-model="#rocket-glb" 
                 shadow="receive:false; cast:false;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"
@@ -153,7 +153,7 @@ f
                 position="-1.415 0.8 1.324" rotation="0 0 0.0" scale="2 2 2"
                 shadow="receive:true; cast:true;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"
-                circles-artefact="label_visible:true; label_offset:0 1 0; arrow_position:down;
+                circles-artefact="label_visible:true; label_offset:0 0.8 0; arrow_position:down;
                                   title:3D-Printed Rockets; 
                                   description:By using 3D printing to create crucial engine parts, rocket manufacturers can dramatically reduce the overall costs of a spacecraft. 3D printing allows engineers to streamline the production of rocket engine components, bypassing a number of production steps.;
                                   label_text:3D Metal Printer;
@@ -162,16 +162,12 @@ f
 
     <a-entity id="navmesh" gltf-model="#navmesh_gltf" visible='True' nav-mesh></a-entity>
     <a-entity id="hub_link"
-                position="1.83 1.335 4.-97" rotation="0 143.672 0"  scale="1 1 1"
+                position="1.83 1.335 4.095" rotation="0 143.672 0"  scale="1 1 1"
                 circles-portal="img_src:#link_1_360; title_text:The Hub; link_url:/w/SC_Hub"></a-entity>
-
-
 
 
     <!-- Circles' end scripts [REQUIRED] -->
     <circles-end-scripts/>
-
-
 
   </body>
 </html>
