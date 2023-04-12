@@ -22,6 +22,7 @@ AFRAME.registerComponent('asteroid-activator', {
         THISCOMP.explosion = document.querySelector("#asteroidExplosion");
 
         // Explosion effect is made invisible at initiation
+        THISCOMP.explosion.setAttribute("visible", false);
         THISCOMP.explosion.getObject3D("mesh").material.opacity = 0;
 
         // Animations for the explosion is applied to the asteroidExplosion element
@@ -51,6 +52,7 @@ AFRAME.registerComponent('asteroid-activator', {
                 THISCOMP.explosion.getObject3D("mesh").material.opacity = 1.0;
                 THISCOMP.explosion.object3D.scale.set(0.01, 0.01, 0.01);
                 THISCOMP.explosion.setAttribute("animation__astExplosion1", { enabled: true});
+                THISCOMP.explosion.setAttribute("visible", true);
             }      
         });
 
@@ -58,14 +60,52 @@ AFRAME.registerComponent('asteroid-activator', {
         THISCOMP.explosion.addEventListener("animationcomplete", e => {
             console.log(e);
             if(e.detail.name == "animation__astExplosion1") {
-                console.log("Made it!");
                 THISCOMP.explosion.setAttribute("animation__astExplosion1", { enabled: false });
                 THISCOMP.explosion.setAttribute("animation__astExplosion2", { enabled: true });
             }
             if(e.detail.name == "animation__astExplosion2") {
                 THISCOMP.explosion.setAttribute("animation__astExplosion2", { enabled: false });
                 THISCOMP.explosion.getObject3D("mesh").material.opacity = 0;
+                THISCOMP.explosion.setAttribute("visible", false);
             }
         });
+    }
+});
+
+AFRAME.registerComponent('heat-dial', {
+    init: function() {
+        const THISCOMP = this;
+        THISCOMP.heatDial = document.querySelector('#heatDial');
+        THISCOMP.sun = document.querySelector('#sun');
+        THISCOMP.earthHeat = document.querySelector('#earthHeat');
+        THISCOMP.heatButtons = document.getElementsByClassName('heatButton');
+        THISCOMP.heatLevel = 0;
+        let newRotPos = null;
+
+        // Size of the sun and opacity of glow effect is adjusted at component initialization
+        THISCOMP.sun.object3D.scale.set(0.4, 0.4, 0.4);
+        THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0;
+
+        // Store heat buttons in an array and deduce which one was pressed by checking the classname
+        for (var i = 0; i < THISCOMP.heatButtons.length; i++) {
+            THISCOMP.heatButtons[i].addEventListener("click", function(event) {
+                let selectedButton = event.target.className;
+                // Rotation for the heat dial is updated based on what heat button was pressed. Same with scale for the sun and opacity for the heat glow effect
+                if(selectedButton.includes("increase") && THISCOMP.heatLevel < 4) {
+                    THISCOMP.heatLevel++;
+                    newRotPos = 90 + (THISCOMP.heatLevel * 45);
+                    THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+                    THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+                    THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+                }
+                if(selectedButton.includes("decrease") && THISCOMP.heatLevel > 0) {
+                    THISCOMP.heatLevel--;
+                    newRotPos = 90 + (THISCOMP.heatLevel * 45);
+                    THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+                    THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+                    THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+                }
+            });
+        }
     }
 });
