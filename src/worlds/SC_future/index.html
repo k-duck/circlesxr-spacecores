@@ -17,23 +17,50 @@
     <!-- a-scene with 'circles-properties' component [REQUIRED] -->
     <a-scene circles_scene_properties>
       <a-assets>
-        <!-- add your assets here. Note that you can use relative links or absolute paths to your world -->
+        <!---------------------- TEXTURES/IMAGES ---------------------->
         <!-- credit: Shutterstock @ https://www.shutterstock.com/image-illustration/360-degree-space-background-stars-panorama-1301723365 -->
         <img id='skyMap' src="assets/textures/1301723365-small.jpg" crossorigin="anonymous">
         <!-- credit: texture used can be found on https://www.solarsystemscope.com/textures/, though it is modified afer being used by a lesson in the IMD 3901 class at Algonquin College -->
         <img id="earth_tex" src="assets/textures/2k_earth_daymap.jpg" crossorigin="anonymous">
+        <!-- credit: Asteroid picture: https://www.sciencenews.org/article/heres-how-asteroid-impact-would-kill-you -->
+        <img id="asteroid_pic" src="assets/textures/asteroid.jpg" crossorigin="anonymous">
+        <!-- credit: created by me (Ryan Clement) -->
+        <img id="dialGauge_pic" src="assets/textures/dial_graphic_flipped.png" crossorigin="anonymous">
+        <!-- credit: https://www.livescience.com/climate-change-uncontrolled -->
+        <img id="globalWarming_pic" src="assets/textures/global_warming.jpg" crossorigin="anonymouse">
+        <!-- credit: https://www.freethink.com/space/space-planes#:~:text=In%20March%202021%2C%20a%20Russian,Space%20Rider%2C%20in%202023%E2%80%8B -->
+        <img id="spaceplane_pic" src="assets/textures/radian_spaceplane.png" crossorigin="anonymous">
+        <!---------------------- TEXTURES/IMAGES ---------------------->
 
         <!---------------------- GLTF MODELS ---------------------->
         <!-- credit: "Asteroid" (https://skfb.ly/6SzzJ) by kayra23 is licensed under Creative Commons Attribution-ShareAlike (http://creativecommons.org/licenses/by-sa/4.0/). -->
         <a-asset-item id="asteroid_gltf" src="assets/models/asteroid/asteroid_1k.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+        <!-- credit: "Sun" (https://skfb.ly/6yGSx) by SebastianSosnowski is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). -->
+        <a-asset-item id="sun_gltf" src="assets/models/sun/scene.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
         <!-- credit: "Red Button" (https://skfb.ly/6vCxt) by Wolf is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). -->
         <a-asset-item id="red_button_bottom_gltf" src="assets/models/red_button/bottom/red_button_bottom.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
         <a-asset-item id="red_button_button_gltf" src="assets/models/red_button/button/red_button_button.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+        <!-- credit: "KSP Starliner 3 SSTO" (https://skfb.ly/ESIS) by Reedster5678 is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/). -->
+        <a-asset-item id="spaceplane_gltf" src="assets/models/jsp_starliner_3_ssto_modified/jsp_starliner_4_ssto_modified.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
+        <!-- credit: Created by me (Ryan Clement) -->
+        <a-asset-item id="heatDial_gltf" src="assets/models/dial.gltf" response-type="arraybuffer" crossorigin="anonymous"></a-asset-item>
         <!---------------------- GLTF MODELS ---------------------->
 
         <!---------------------- SOUND ---------------------->
+        <!-- credit: <a href="https://pixabay.com/users/musictown-25873992/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=22136">Musictown</a> from <a href="https://pixabay.com/music//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=22136">Pixabay</a> -->
+        <audio id="atmosphericTrack" src="assets/sounds/cinematic-atmosphere-score-2-22136_01_compressed.mp3" preload="auto" crossorigin="anonymous"></audio>
         <!-- credit: Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=38129">Pixabay</a> -->
         <audio id="asteroidButtonPress" src="assets/sounds/button-pressed-38129.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <!-- credit: https://www.youtube.com/watch?v=nDnC2CHRNM4 -->
+        <audio id="asteroidApproaching" src="assets/sounds/Falling Sound Effect.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <!-- credit: Sound Effect from <a href="https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=music&amp;utm_content=6055">Pixabay</a> -->
+        <audio id="asteroidImpact" src="assets/sounds/explosion-6055.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <!-- credit: Created by me (Ryan Clement) -->
+        <audio id="asteroidArtifactAudio" src="assets/sounds/Asteroids_01.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <!-- credit: Created by me (Ryan Clement) -->
+        <audio id="heatDialArtifactAudio" src="assets/sounds/Climate Change_01.mp3" preload="auto" crossorigin="anonymous"></audio>
+        <!-- credit: Created by me (Ryan Clement) -->
+        <audio id="spaceplaneArtifactAudio" src="assets/sounds/Spaceplane_01.mp3" preload="auto" crossorigin="anonymous"></audio>
         <!---------------------- SOUND ---------------------->
 
         <!-- Circles' built-in assets [REQUIRED] -->
@@ -43,9 +70,9 @@
       <!-- Circles' built-in manager and avatar [REQUIRED] -->
       <circles-manager-avatar/>
 
-      <!---------------------- INTERFACE ---------------------->
-
-      <!---------------------- INTERFACE ---------------------->
+      <!---------------------- MUSIC ---------------------->
+      <a-entity circles-sound="src:#atmosphericTrack; autoplay: true; type: basic-nondiegetic; loop: true; volume: 0.3"></a-entity>
+      <!---------------------- MUSIC ---------------------->
 
       <!---------------------- SCENE MODELS ---------------------->
       <!-- Earth Model -->
@@ -53,16 +80,34 @@
       material="shader: standard; src: #earth_tex; metalness: 0.37; roughness: 0.72"
       shadow="cast: true; receive: true;"
       position="0 7 -14.808">
+        <!-- Explosion is made visible once the asteroid hits it -->
+        <a-entity id="asteroidExplosion" geometry="primitive: sphere; radius: 1.2"
+        material="shader: flat; color: #ff9d1c; transparent: true;"
+        position="5.840 1.065 0.549">
+        </a-entity>
+        <!-- Glow effect has the opacity raised based on the position of the heat dial -->
+        <a-entity id="earthHeat" 
+        geometry="primitive: sphere; radius: 6.1"
+        material="shader: standard; color: #ff5e00; emissive: #ff8000; emissiveIntensity: 1; transparent: true; blending: additive;">
+        </a-entity>
       </a-entity>
       <!-- Asteroid -->
       <a-entity id="asteroid" 
-      position="-2.891 4.058 -9.768" 
+      position="78.74 25.46 -15.12" 
       rotation="0 0 0" scale="1 1 1" 
       gltf-model="#asteroid_gltf" 
       shadow="cast:true; receive:true;">
+        <!-- Asteroid sound effects -->
+        <a-entity id="asteroidApproachingSound" sound="src:#asteroidApproaching; rolloffFactor: 0.3"></a-entity>
       </a-entity>
-      <!-- Control panel 1 (Button animation) -->
-      <a-entity class="control_panel_1" position="0 0 -3">
+      <a-entity id="asteroidImpactSound" sound="src:#asteroidImpact; rolloffFactor: 0.3" position="5.948 7.024 -14.437"></a-entity>
+      <!-- Sun -->
+      <a-entity id="sun"
+      position="0 25.2 -14.808"
+      gltf-model="#sun_gltf">
+      </a-entity>
+      <!-- Control panel 1 (Asteroid animation) -->
+      <a-entity class="control_panel_1" position="-4 0 -5" rotation="0 -40 0">
         <a-entity geometry="primitive: box; height: 0.15; width: 0.9; depth: 0.8"
         material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
         shadow="cast: false; receive: false">
@@ -86,7 +131,8 @@
                   gltf-model="#red_button_button_gltf"
                   circles-sphere-env-map="src: #skyMap"
                   circles-interactive-object="type: outline; highlight_color: rgb(255, 255, 255); click_sound: #asteroidButtonPress"
-                  animation__interact="property: position.y; from: -0.05; to: 0; startEvents: click; dur: 300;">
+                  animation__interact="property: position.y; from: -0.05; to: 0; startEvents: click; dur: 300;"
+                  asteroid-activator="">
                   </a-entity>
                 </a-entity>
               </a-entity>
@@ -94,20 +140,152 @@
           </a-entity>
         </a-entity>
       </a-entity>
+      <!-- Educational Artifact for asteroid animation will go here -->
+      <a-entity id="asteroid_artifact" position="-4 2.6 -5" material="shader: flat;" rotation="0 -40 0" circles-artefact="
+      label_visible: true;
+      enabled: false;
+      label_offset: 0 -0.7 0;
+      label_text: Celestial Objects;
+      title: Celestial Objects 1/2;
+      title_back: Celestial Objects 2/2;
+      audio: #asteroidArtifactAudio;
+      description: Asteroids, comets, and rogue planets are examples of just some of the celestial objects that pose an existential threat to humanity and other life on earth. A solid understanding of space travel gives humanity more opportunities to not only detect things such as incoming asteroids,;
+      description_back: but more knowledge on how we can defend ourselves from those threats. Asteroids, for example, could be deflected by robotics or even others asteroids if properly prepared for such an event.">
+        <a-entity geometry="primitive: box; width: 1; height: 0.725; depth: 0.01" 
+        material="shader: flat; color: #ffffff">
+          <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#asteroid_pic; shader: flat;" position="0 0 0.008"></a-entity>
+        </a-entity>
+      </a-entity>
       <!-- Control panel 2 (Dial) -->
-      <!-- Physics objects (Garbage can)-->
+      <a-entity class="control_panel_2" position="4 0 -5" rotation="0 40 0">
+        <a-entity geometry="primitive: box; height: 0.15; width: 0.9; depth: 0.8"
+        material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+        shadow="cast: false; receive: false">
+          <a-entity geometry="primitive: box; height: 0.33; width: 0.8; depth: 0.7;"
+          material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+          shadow="cast: false; receive: false;">
+            <a-entity geometry="primitive: box; height: 1; width: 0.65; depth: 0.55;"
+            material="shader: standard; metalness: 0.87: roughness: 0.18; color: #5c5c5c"
+            shadow="cast: false; receive: false;"
+            position="0 0.662 0">
+              <a-entity geometry="primitive: box; height: 0.820; width: 1.100; depth: 0.260"
+              material="shader: standard; metalness: 0.87; roughness: 0.18; color: #d4a200"
+              shadow="cast: false; receive: false;"
+              position="0 0.529 0"
+              rotation="-64.645 0 0">
+              <!-- Parent element is needed in order for the pivot to be in the right position for the animations -->
+                <a-entity rotation="90 0 0" position="0 0.023 0.049">
+                  <a-entity id="heatDial" 
+                  scale="0.15 0.15 0.15" 
+                  rotation="0 90 0" 
+                  position="0 0 0" 
+                  gltf-model="#heatDial_gltf"
+                  circles-networked="">
+                  </a-entity>
+                  <a-entity class="heatButton increase"
+                  position="0.4 0.1 0.2"
+                  rotation="0 0 0"
+                  geometry="primitive: cylinder; radius: 0.08; height: 0.15"
+                  material="shader: standard; color: #fadd00;"
+                  circles-interactive-object="type: outline; highlight_color: rgb(255, 255, 255);"
+                  animation__interact="property: position; from: 0.4 0.03 0.2; to: 0.4 0.1 0.2; startEvents: click; dur: 300;"
+                  heat-dial>
+                  </a-entity>
+                  <a-entity text="value: +; align: center; width: 5" position="0.4 0.3 0"></a-entity>
+                  <a-entity class="heatButton decrease"
+                  position="-0.4 0.1 0.2"
+                  rotation="0 0 0"
+                  geometry="primitive: cylinder; radius: 0.08; height: 0.15"
+                  material="shader: standard; color: #fadd00;"
+                  circles-interactive-object="type: outline; highlight_color: rgb(255, 255, 255);"
+                  animation__interact="property: position; from: -0.4 0.03 0.2; to: -0.4 0.1 0.2; startEvents: click; dur: 300;">
+                  </a-entity>
+                  <a-entity text="value: -; align: center; width: 5" position="-0.4 0.3 0"></a-entity>
+                  <a-entity geometry="primitive: plane; width: 0.62; height: 0.47"
+                  material="shader: flat; src: #dialGauge_pic; alphaTest: 0.5;"
+                  position="0 0.104 0.082"
+                  rotation="-90.085 0 0">
+                  </a-entity>
+                </a-entity>
+              </a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+        <!-- Educational artifact for heat dial will go here -->
+        <a-entity id="heatDial_artifact" position="4 2.6 -5" material="shader: flat;" rotation="0 40 0" circles-artefact="
+        label_visible: true;
+        enabled: false;
+        label_offset: 0 -0.7 0;
+        label_text: Global Warming;
+        title: Global Warming 1/2;
+        title_back: Global Warming 2/2;
+        audio: #heatDialArtifactAudio;
+        description: Earth is bound to be affected by disasters outside of human control. Climate change is rising temperatures on earth, causing sea levels to rise, and causing more extreme weather events. Eventually, climate change will make Earth uninhabitable for most living things.; 
+        description_back: Even if climate change weren't a factor, the sun will inevitably turn into a Red Giant in a few billion years, and the earth will become unlivable long before the sun gets to that point. Colonizing space would give life on earth a second chance and possibly create opportunities to mitigate the impact some of natural disasters.;">
+        <a-entity geometry="primitive: box; width: 1; height: 0.725; depth: 0.01" 
+        material="shader: flat; color: #ffffff">
+          <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#globalWarming_pic; shader: flat;" position="0 0 0.008"></a-entity>
+        </a-entity>
+      </a-entity>
+      <!-- Control Panel 3 (Spaceplane) -->
+      <a-entity class="control_panel_3" position="0 0 -3" rotation="0 0 0">
+        <a-entity geometry="primitive: box; height: 0.15; width: 0.9; depth: 0.8"
+        material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+        shadow="cast: false; receive: false">
+          <a-entity geometry="primitive: box; height: 0.33; width: 0.8; depth: 0.7;"
+          material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+          shadow="cast: false; receive: false;">
+            <a-entity geometry="primitive: box; height: 1; width: 0.65; depth: 0.55;"
+            material="shader: standard; metalness: 0.87: roughness: 0.18; color: #5c5c5c"
+            shadow="cast: false; receive: false;"
+            position="0 0.662 0">
+              <a-entity geometry="primitive: box; height: 0.820; width: 1.100; depth: 0.260"
+              material="shader: standard; metalness: 0.87; roughness: 0.18; color: #d4a200"
+              shadow="cast: false; receive: false;"
+              position="0 0.529 0"
+              rotation="-64.645 0 0">
+              </a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
+      </a-entity>
+      <!-- Educational artifact for spaceplane will go here -->
+      <a-entity id="spaceplane_artifact" position="0 2.2 -2.8" material="shader: flat;" rotation="0 0 0" 
+      circles-artefact="title: Spaceplanes (1/2);
+      title_back: Spaceplanes (2/2);
+      label_visible: true;
+      label_arrow_position: down;
+      enabled: false;
+      audio: #spaceplaneArtifactAudio;
+      label_offset: 0 -0.6 0;
+      label_text: Spaceplanes;
+      description: One major advancement we can expect for the future of space travel is more advanced spaceplanes. One example of a revolutionary spaceplane we could see this decade is the Radian One,a spaceplane that can fly into orbit after taking off horizontally on the ground like a normal airliner.;
+      description_back: Radian’s CEO says 'we intend to make space travel nearly as simple and convenient as airliner travel. 'The Radian One will hold up to five crew members in addition to 5,000 pounds of cargo, and Radian plans to have the vehicles operational sometime before 2030.">
+        <!-- Spaceplane -->
+        <a-entity id="spaceplane"
+        position="0 0 0"
+        rotation="90 0 0"
+        scale="0.04 0.04 0.04"
+        gltf-model="#spaceplane_gltf">
+        </a-entity>
+      </a-entity>
       <!---------------------- SCENE MODELS ---------------------->
 
       <!---------------------- PORTALS ---------------------->
-      <a-entity id="Portal-Wardrobe"
-         position="10 0.8 0" rotation="0 0 0"
-         circles-portal="img_src:/global/assets/textures/equirectangular/WhiteBlue.jpg; title_text:Wardrobe; link_url:/w/Wardrobe"
-          shadow>
+      <a-entity id="SCHubPortal"
+         position="0 1.2 5" rotation="0 90 0"
+         circles-portal="title_text:Return to Station; link_url:/w/SC_Hub">
       </a-entity>
       <!---------------------- PORTALS ---------------------->
 
       <!---------------------- CHECKPOINTS ---------------------->
-
+      <!-- Asteroid button checkpoint -->
+      <a-entity circles-checkpoint position="-4.979 0 -3.951"></a-entity>
+      <!-- Heat dial checkpoint -->
+      <a-entity circles-checkpoint position="4.979 0 -3.951"></a-entity>
+      <!-- Spaceplane checkpoint -->
+      <a-entity circles-checkpoint position="-20.206 0 -7.847"></a-entity>
       <!---------------------- CHECKPOINTS ---------------------->
 
       <!---------------------- ENVIRONMENT ---------------------->
