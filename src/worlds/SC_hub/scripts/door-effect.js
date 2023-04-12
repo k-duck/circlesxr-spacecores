@@ -20,7 +20,9 @@ AFRAME.registerComponent('door-effect', {
     //note that it is not enabled initially
     
     
- 
+    function msgprint() {  
+      alert("You are Successfully Called the JavaScript function");  
+   }  
     
     //listen on click
     Context_AF.el.addEventListener('click', function() {

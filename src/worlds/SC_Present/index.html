@@ -15,15 +15,15 @@
     <a-scene circles_scene_properties>
     <a-assets timeout="10000">
 
-      <!-- 
+      <!--
       Credit:
         "Basic Elevator" (https://skfb.ly/oDCMN) by moux.blender is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
         <a href="https://www.freepik.com/free-photo/grunge-wall-texture_1017602.htm#query=concrete%20floor%20texture&position=0&from_view=keyword&track=ais">Image by jannoon028</a> on Freepik
         "SCOUTcorexy:V4:hXYZ∅10:LM10UU:F694ZZ:GT2" (https://skfb.ly/Uuv7) by thorfab is licensed under CC Attribution-NonCommercial-ShareAlike (http://creativecommons.org/licenses/by-nc-sa/4.0/).
-        "Falcon 9 SpaceX rocket" (https://skfb.ly/6C7YA) by artemycz is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).  
+        "Falcon 9 SpaceX rocket" (https://skfb.ly/6C7YA) by artemycz is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
       -->
 
-        
+
 
         <!-- audio -->
         <audio id="rocket_launch-snd" src="/worlds/SC_Present/assets/audio/rocketLaunch.mp3" preload="true"></audio>
@@ -39,13 +39,13 @@
         <img id='skyMap' src='/global/assets/textures/equirectangular/WhiteBlue.jpg' crossorigin="anonymous">
 
         <!-- physical environment -->
-        <a-asset-item id="Room-gltf" response-type="arraybuffer" src="/worlds/SC_Present/assets/models/scene/scene.glb"></a-asset-item>
-        
+
+        <a-asset-item id="Room-gltf" response-type="arraybuffer" src="/worlds/WIT_2_Lab/assets/models/room/scene.gltf"></a-asset-item>
 
         <!-- objects models -->
         <a-asset-item id="rocket-glb" src="/worlds/SC_Present/assets/models/spaceship/rocket.glb" response-type="arraybuffer"></a-asset-item>
         <a-asset-item id="3dprinter-glb" src="/worlds/SC_Present/assets/models/3d-printer/3dPrinter.glb" response-type="arraybuffer"></a-asset-item>
-        
+
         <a-asset-item id="3dPrinter_Frame-glb" src="/worlds/SC_Present/assets/models/3d-printer/3dPrinter_Frame.glb" response-type="arraybuffer"></a-asset-item>
         <a-asset-item id="3dPrinter_Head-glb" src="/worlds/SC_Present/assets/models/3d-printer/3dPrinter_Head.glb" response-type="arraybuffer"></a-asset-item>
         <a-asset-item id="3dPrinter_Horizontal-glb" src="/worlds/SC_Present/assets/models/3d-printer/3dPrinter_Horizontal.glb" response-type="arraybuffer"></a-asset-item>
@@ -72,12 +72,12 @@
       <a-entity id="checkpoint_Lv3" circles-checkpoint position="0 8 -8.2"></a-entity>
 
       <a-entity circles-button="pedastal_color:rgb(74, 87, 95);" circles-sendpoint="target:#checkpoint_Lv2;" position="-1.05 1.304 4.667" rotation="0 -90 90" scale="0.8 0.8 0.8"></a-entity>
-      
+
       <a-entity circles-button="pedastal_color:rgb(74, 87, 95); button_color:rgb(124, 252, 0);" circles-sendpoint="target:#checkpoint_Lv1;" position="1.13 1 -8.85" rotation="0 90 90" scale="0.8 0.8 0.8"></a-entity>
       <a-entity circles-button="pedastal_color:rgb(74, 87, 95);" circles-sendpoint="target:#checkpoint_Lv3;" position="1.13 1.5 -8.85" rotation="0 90 90" scale="0.8 0.8 0.8"></a-entity>
-      
+
       <a-entity circles-button="pedastal_color:rgb(74, 87, 95); button_color:rgb(124, 252, 0);" circles-sendpoint="target:#checkpoint_Lv2;" position="1.13 9.1 -8.85" rotation="0 90 90" scale="0.8 0.8 0.8"></a-entity>
-      
+
 
       <!-- sky and lights -->
       <a-entity light="type:ambient; color:#FFF; intensity:0.1"></a-entity>
@@ -93,12 +93,12 @@ f
       <!-- objects -->
       <a-entity id="obj-Rocket"
                 position="1.113 0.483 -6.1" rotation="0 90 0" scale=".0009 .0009 .0009"
-                gltf-model="#rocket-glb" 
+                gltf-model="#rocket-glb"
                 shadow="receive:false; cast:false;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"
                 circles-artefact="inspectScale:.001 .001 .001; textRotationY:0; textLookAt:false; inspectRotation:0 0 0; inspectOffsetY:-0.9;
                                   label_visible:true; label_offset:0.006 1.5 0.55; arrow_position:down;
-                                  title:Falcon 9; 
+                                  title:Falcon 9;
                                   description:'Falcon 9 is a reusable, two-stage rocket designed and manufactured by SpaceX for the reliable and safe transport of people and payloads into Earth orbit and beyond. Reusability allows SpaceX to refly the most expensive parts of the rocket, which in turn drives down the cost of space access.';
                                   title_back:SpaceX;
                                   description_back:Space Exploration Technologies Corp(SpaceX) is an American spacecraft manufacturer headquartered in California. It was founded in 2002 by Elon Musk with the stated goal of reducing space transportation costs to enable the colonization of Mars. ;
@@ -107,26 +107,26 @@ f
 
       <a-entity id="obj-RocketLarge"
                 position="0 0.215 -4.414" rotation="0 180 0" scale=".007 .005 .007"
-                gltf-model="#rocket-glb" 
+                gltf-model="#rocket-glb"
                 shadow="receive:true; cast:True;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"></a-entity>
 
       <a-entity id="obj-3dPrinterLarge"
       visible='false'
                 position="3.8 0 -3.013" rotation="0 180 0" scale="2.75338 2.75338 2.75338"
-                gltf-model="#3dprinter-glb" 
+                gltf-model="#3dprinter-glb"
                 shadow="receive:true; cast:True;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"></a-entity>
 
                 <a-entity id="obj-3dPrinter_Frame"
                 position="3.8 0 -3.013" rotation="0 180 0" scale="2.75338 2.75338 2.75338"
-                gltf-model="#3dPrinter_Frame-glb" 
+                gltf-model="#3dPrinter_Frame-glb"
                 shadow="receive:true; cast:True;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"></a-entity>
 
                 <a-entity id="obj-3dPrinter_Head"
                 position="3.8 0 -3.013" rotation="0 180 0" scale="2.75338 2.75338 2.75338"
-                gltf-model="#3dPrinter_Head-glb" 
+                gltf-model="#3dPrinter_Head-glb"
                 shadow="receive:true; cast:True;"
 
                 animation__position="property: position; from: 3.8 0 -3.71; to: 3.8 0.3 -2.46; loop: true; dur: 2000; dir: alternate; easing: linear"
@@ -134,15 +134,15 @@ f
 
                 <a-entity id="obj-3dPrinter_Vertical"
                 position="3.8 0 -3.013" rotation="0 180 0" scale="2.75338 2.75338 2.75338"
-                gltf-model="#3dPrinter_Vertical-glb" 
+                gltf-model="#3dPrinter_Vertical-glb"
                 shadow="receive:true; cast:True;"
-                
+
                 animation__position="property: position; from: 3.8 0 -3.013; to: 3.8 0.3 -3.013; loop: true; dur: 2000; dir: alternate; easing: linear"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"></a-entity>
 
                 <a-entity id="obj-3dPrinter_Horizontal"
                 position="3.8 0 -3.013" rotation="0 180 0" scale="2.75338 2.75338 2.75338"
-                gltf-model="#3dPrinter_Horizontal-glb" 
+                gltf-model="#3dPrinter_Horizontal-glb"
                 shadow="receive:true; cast:True;"
 
                 animation__position="property: position; from: 2.9 0 -3.013; to: 3.2 0 -3.013; loop: true; dur: 2000; dir: alternate; easing: linear"
@@ -154,11 +154,11 @@ f
                 shadow="receive:true; cast:true;"
                 circles-sphere-env-map="src:/global/assets/textures/equirectangular/WhiteBlue.jpg"
                 circles-artefact="label_visible:true; label_offset:0 0.8 0; arrow_position:down;
-                                  title:3D-Printed Rockets; 
+                                  title:3D-Printed Rockets;
                                   description:By using 3D printing to create crucial engine parts, rocket manufacturers can dramatically reduce the overall costs of a spacecraft. 3D printing allows engineers to streamline the production of rocket engine components, bypassing a number of production steps.;
                                   label_text:3D Metal Printer;
                                   audio:#printing-snd; volume:0.4;"></a-entity>
-    
+
 
     <a-entity id="navmesh" gltf-model="#navmesh_gltf" visible='True' nav-mesh></a-entity>
     <a-entity id="hub_link"
