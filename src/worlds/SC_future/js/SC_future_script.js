@@ -86,26 +86,68 @@ AFRAME.registerComponent('heat-dial', {
         THISCOMP.sun.object3D.scale.set(0.4, 0.4, 0.4);
         THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0;
 
-        // Store heat buttons in an array and deduce which one was pressed by checking the classname
-        for (var i = 0; i < THISCOMP.heatButtons.length; i++) {
-            THISCOMP.heatButtons[i].addEventListener("click", function(event) {
-                let selectedButton = event.target.className;
-                // Rotation for the heat dial is updated based on what heat button was pressed. Same with scale for the sun and opacity for the heat glow effect
-                if(selectedButton.includes("increase") && THISCOMP.heatLevel < 4) {
-                    THISCOMP.heatLevel++;
-                    newRotPos = 90 + (THISCOMP.heatLevel * 45);
+        THISCOMP.heatIncrementEvent = "increaseHeat";
+
+        THISCOMP.el.sceneEl.addEventListener(CIRCLES.EVENTS.WS_CONNECTED, function (data) {
+            THISCOMP.socket = CIRCLES.getCirclesWebsocket();
+
+            //Store heat buttons in an array and deduce which one was pressed by checking the classname. Events are emitted when they are pressed
+            for (var i = 0; i < THISCOMP.heatButtons.length; i++) {
+                THISCOMP.heatButtons[i].addEventListener("click", function(event) {
+                    let selectedButton = event.target.className;
+                    // Rotation for the heat dial is updated based on what heat button was pressed. Same with scale for the sun and opacity for the heat glow effect
+                    if(selectedButton.includes("increase") && THISCOMP.heatLevel < 4) {
+                        THISCOMP.heatLevel++;
+                        THISCOMP.socket.emit(THISCOMP.heatIncrementEvent, {heat:THISCOMP.heatLevel , room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
+                        console.log("Increase event");
+                        newRotPos = 90 + (THISCOMP.heatLevel * 45);
+                        THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+                        THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+                        THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+                    }
+                    if(selectedButton.includes("decrease") && THISCOMP.heatLevel > 0) {
+                        THISCOMP.heatLevel--;
+                        THISCOMP.socket.emit(THISCOMP.heatIncrementEvent, {heat:THISCOMP.heatLevel , room:CIRCLES.getCirclesGroupName(), world:CIRCLES.getCirclesWorldName()});
+                        console.log("Decrease event");
+                        newRotPos = 90 + (THISCOMP.heatLevel * 45);
+                        THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+                        THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+                        THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+                    }
+                });
+
+                // Listen for any other users pressing the heat buttons
+                THISCOMP.socket.on(THISCOMP.heatIncrementEvent, function(data) {
+                    console.log(data);
+                    newRotPos = 90 + (data.heat * 45);
                     THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
-                    THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
-                    THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
-                }
-                if(selectedButton.includes("decrease") && THISCOMP.heatLevel > 0) {
-                    THISCOMP.heatLevel--;
-                    newRotPos = 90 + (THISCOMP.heatLevel * 45);
-                    THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
-                    THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
-                    THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
-                }
-            });
+                    THISCOMP.sun.object3D.scale.set(0.4 + (data.heat * 0.2), 0.4 + (data.heat * 0.2), 0.4 + (data.heat * 0.2));
+                    THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (data.heat * 0.25);
+                });
+            }
         }
-    }
+
+        //Store heat buttons in an array and deduce which one was pressed by checking the classname
+        // for (var i = 0; i < THISCOMP.heatButtons.length; i++) {
+        //     THISCOMP.heatButtons[i].addEventListener("click", function(event) {
+        //         let selectedButton = event.target.className;
+        //         // Rotation for the heat dial is updated based on what heat button was pressed. Same with scale for the sun and opacity for the heat glow effect
+        //         if(selectedButton.includes("increase") && THISCOMP.heatLevel < 4) {
+        //             THISCOMP.heatLevel++;
+        //             newRotPos = 90 + (THISCOMP.heatLevel * 45);
+        //             THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+        //             THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+        //             THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+        //         }
+        //         if(selectedButton.includes("decrease") && THISCOMP.heatLevel > 0) {
+        //             THISCOMP.heatLevel--;
+        //             newRotPos = 90 + (THISCOMP.heatLevel * 45);
+        //             THISCOMP.heatDial.object3D.rotation.set(THREE.MathUtils.degToRad(0), THREE.MathUtils.degToRad(newRotPos), THREE.MathUtils.degToRad(0));
+        //             THISCOMP.sun.object3D.scale.set(0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2), 0.4 + (THISCOMP.heatLevel * 0.2));
+        //             THISCOMP.earthHeat.getObject3D('mesh').material.opacity = 0 + (THISCOMP.heatLevel * 0.25);
+        //         }
+        //     });
+        // }
+        
+    )}
 });

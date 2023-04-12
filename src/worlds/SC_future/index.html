@@ -179,7 +179,8 @@
                   scale="0.15 0.15 0.15" 
                   rotation="0 90 0" 
                   position="0 0 0" 
-                  gltf-model="#heatDial_gltf">
+                  gltf-model="#heatDial_gltf"
+                  circles-networked="">
                   </a-entity>
                   <a-entity class="heatButton increase"
                   position="0.4 0.1 0.2"
@@ -227,27 +228,46 @@
           <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#globalWarming_pic; shader: flat;" position="0 0 0.008"></a-entity>
         </a-entity>
       </a-entity>
-      <!-- Physics objects (Garbage can)-->
-      <!-- Spaceplane -->
-      <a-entity id="spaceplane"
-      position="-26.701 3 -11.297"
-      rotation="0 -90 0"
-      gltf-model="#spaceplane_gltf">
+      <!-- Control Panel 3 (Spaceplane) -->
+      <a-entity class="control_panel_3" position="0 0 -3" rotation="0 0 0">
+        <a-entity geometry="primitive: box; height: 0.15; width: 0.9; depth: 0.8"
+        material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+        shadow="cast: false; receive: false">
+          <a-entity geometry="primitive: box; height: 0.33; width: 0.8; depth: 0.7;"
+          material="shader: standard; metalness: 0.87; roughness: 0.18; color: #5c5c5c;"
+          shadow="cast: false; receive: false;">
+            <a-entity geometry="primitive: box; height: 1; width: 0.65; depth: 0.55;"
+            material="shader: standard; metalness: 0.87: roughness: 0.18; color: #5c5c5c"
+            shadow="cast: false; receive: false;"
+            position="0 0.662 0">
+              <a-entity geometry="primitive: box; height: 0.820; width: 1.100; depth: 0.260"
+              material="shader: standard; metalness: 0.87; roughness: 0.18; color: #d4a200"
+              shadow="cast: false; receive: false;"
+              position="0 0.529 0"
+              rotation="-64.645 0 0">
+              </a-entity>
+            </a-entity>
+          </a-entity>
+        </a-entity>
       </a-entity>
       <!-- Educational artifact for spaceplane will go here -->
-      <a-entity id="spaceplane_artifact" position="-20.206 2 -8.1" material="shader: flat;" rotation="0 0 0" 
+      <a-entity id="spaceplane_artifact" position="0 2.2 -2.8" material="shader: flat;" rotation="0 0 0" 
       circles-artefact="title: Spaceplanes (1/2);
       title_back: Spaceplanes (2/2);
       label_visible: true;
+      label_arrow_position: down;
       enabled: false;
       audio: #spaceplaneArtifactAudio;
-      label_offset: 0 -0.7 0;
+      label_offset: 0 -0.6 0;
       label_text: Spaceplanes;
       description: One major advancement we can expect for the future of space travel is more advanced spaceplanes. One example of a revolutionary spaceplane we could see this decade is the Radian One,a spaceplane that can fly into orbit after taking off horizontally on the ground like a normal airliner.;
       description_back: Radian’s CEO says 'we intend to make space travel nearly as simple and convenient as airliner travel. 'The Radian One will hold up to five crew members in addition to 5,000 pounds of cargo, and Radian plans to have the vehicles operational sometime before 2030.">
-        <a-entity geometry="primitive: box; width: 1; height: 0.725; depth: 0.01" 
-        material="shader: flat; color: #ffffff">
-          <a-entity geometry="primitive: plane; width: 0.9; height: 0.6" material="src:#spaceplane_pic; shader: flat;" position="0 0 0.008"></a-entity>
+        <!-- Spaceplane -->
+        <a-entity id="spaceplane"
+        position="0 0 0"
+        rotation="90 0 0"
+        scale="0.04 0.04 0.04"
+        gltf-model="#spaceplane_gltf">
         </a-entity>
       </a-entity>
       <!---------------------- SCENE MODELS ---------------------->
